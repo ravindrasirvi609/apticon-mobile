@@ -65,3 +65,15 @@ Create the backend module by module.
 Start by designing the Mobile API architecture.
 
 Wait for my approval before generating code.
+
+                     APTICON Website
+                          │
+          ┌───────────────┴───────────────┐
+          │                               │
+      Web Application                React Native App
+          │                               │
+          └───────────────┬───────────────┘
+                          │
+                 Next.js API Routes
+                          │
+                     MongoDB
