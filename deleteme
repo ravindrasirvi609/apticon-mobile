@@ -79,3 +79,313 @@ Wait for my approval before generating code.
                      MongoDB
 
 my reactnative application will be the fully seperate frontend that communicates with the existing backend via the new mobile APIs. The architecture will ensure that both the web application and the mobile app can coexist and share the same database without interfering with each other.
+
+The APIs you create will be consumed by a React Native (Expo + TypeScript) mobile application.
+
+This mobile application is designed for APTICON event staff only.
+
+It is NOT for attendees.
+
+The mobile application will be used during the conference by registration desk staff, volunteers, and event coordinators.
+
+The purpose of the application is to manage attendee operations quickly and efficiently during the event.
+
+=========================================================
+USER TYPES
+=========================================================
+
+1. Registration Desk Staff
+
+2. Food Counter Staff
+
+3. Kit Distribution Staff
+
+4. Certificate Counter Staff
+
+5. Event Admin
+
+=========================================================
+APPLICATION FLOW
+=========================================================
+
+Staff Login
+
+↓
+
+Dashboard
+
+↓
+
+Search Attendee OR Scan QR Code
+
+↓
+
+Open Attendee Profile
+
+↓
+
+Perform Required Action
+
+↓
+
+Save
+
+↓
+
+Ready for Next Attendee
+
+=========================================================
+LOGIN
+=========================================================
+
+Staff logs in using
+
+Email
+
+Password
+
+JWT Authentication
+
+=========================================================
+DASHBOARD
+=========================================================
+
+Display live statistics.
+
+Total Registered
+
+Checked In
+
+ID Cards Issued
+
+Breakfast Distributed
+
+Lunch Distributed
+
+Dinner Distributed
+
+Kit Distributed
+
+Certificates Distributed
+
+=========================================================
+ATTENDEE SEARCH
+=========================================================
+
+Search attendee by
+
+Registration Number
+
+QR Code
+
+Mobile Number
+
+Email
+
+Full Name
+
+=========================================================
+QR SCANNER
+=========================================================
+
+The application includes a QR Scanner.
+
+Each attendee has a QR Code generated from the registration portal.
+
+When QR is scanned
+
+Return attendee details.
+
+=========================================================
+ATTENDEE PROFILE
+=========================================================
+
+Display
+
+Profile Photo
+
+Full Name
+
+Registration Number
+
+Registration Type
+
+Company
+
+Mobile Number
+
+Email
+
+Payment Status
+
+Badge Number
+
+Current Status
+
+=========================================================
+AVAILABLE ACTIONS
+=========================================================
+
+Check In
+
+Issue ID Card
+
+Issue Breakfast
+
+Issue Lunch
+
+Issue Dinner
+
+Issue Kit
+
+Issue Certificate
+
+Every action should be recorded.
+
+=========================================================
+BUSINESS RULES
+=========================================================
+
+An attendee can only
+
+Check In once
+
+Receive Breakfast once
+
+Receive Lunch once
+
+Receive Dinner once
+
+Receive Kit once
+
+Receive Certificate once
+
+Duplicate actions must be prevented.
+
+Return meaningful error messages.
+
+=========================================================
+ACTION LOG
+=========================================================
+
+Every action should store
+
+Attendee
+
+Staff Member
+
+Date
+
+Time
+
+Action Type
+
+Device (optional)
+
+=========================================================
+SEARCH
+=========================================================
+
+Support
+
+Pagination
+
+Sorting
+
+Filtering
+
+Fast Search
+
+=========================================================
+REPORTS
+=========================================================
+
+The application needs reports for
+
+Checked In
+
+Breakfast
+
+Lunch
+
+Dinner
+
+Kit Distribution
+
+Certificate Distribution
+
+=========================================================
+PROFILE
+=========================================================
+
+Staff Profile
+
+Change Password
+
+Logout
+
+=========================================================
+OFFLINE SUPPORT
+=========================================================
+
+Future Feature
+
+Currently ignore offline mode.
+
+=========================================================
+PUSH NOTIFICATIONS
+=========================================================
+
+Future Feature
+
+Do not implement.
+
+=========================================================
+API RESPONSE FORMAT
+=========================================================
+
+Every API should return
+
+{
+success: true,
+message: "",
+data: {}
+}
+
+Errors
+
+{
+success: false,
+message: "",
+errors: []
+}
+
+=========================================================
+IMPORTANT
+=========================================================
+
+Do not generate frontend code.
+
+Generate backend APIs only.
+
+The backend already has
+
+Registration Module
+
+Abstract Module
+
+Authentication
+
+Payments
+
+MongoDB
+
+Reuse existing attendee registration data whenever possible.
+
+Create only the additional APIs required by the mobile application.
+
+Avoid duplicate data.
+
+Follow REST API best practices.
+
+Explain every endpoint before implementing it.
