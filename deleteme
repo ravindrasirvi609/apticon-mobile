@@ -77,3 +77,5 @@ Wait for my approval before generating code.
                  Next.js API Routes
                           │
                      MongoDB
+
+my reactnative application will be the fully seperate frontend that communicates with the existing backend via the new mobile APIs. The architecture will ensure that both the web application and the mobile app can coexist and share the same database without interfering with each other.
