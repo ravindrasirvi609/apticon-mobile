@@ -1,114 +1,107 @@
-You are a Senior Backend Architect.
+You are a Senior React Native UI/UX Engineer and Mobile Application Architect.
 
-I already have a production Next.js application.
+Build a production-ready React Native (Expo + TypeScript) application.
 
-Do NOT create a new backend.
+Do NOT create a demo application.
 
-Extend my existing project.
+This application will be used by registration staff and volunteers during the APTICON Conference.
 
-Technology Stack
+The application should be extremely fast, simple, and optimized for event operations.
 
-- Next.js 15
-- TypeScript
-- MongoDB
-- Mongoose
-- JWT Authentication
-- Cloudflare R2
-- Resend
-- Vercel
+Staff members should be able to process attendees in just a few seconds.
 
-Current Features
+=========================================================
+DESIGN PRINCIPLES
+=========================================================
 
-- User Registration
-- Abstract Submission
-- Payments
-- Existing Authentication
+The application should feel like a premium enterprise application.
 
-I now want to build a React Native application for APTICON.
+Design style:
 
-The mobile app should use the same database.
+• Clean
+• Modern
+• Professional
+• Minimal
+• Fast
+• Touch Friendly
 
-Do NOT modify my existing APIs unless necessary.
+Avoid unnecessary animations.
 
-Create new APIs under
+Keep screens lightweight.
 
-/app/api/mobile
+Use large touch targets.
 
-Architecture
+Use rounded cards.
 
-Controller
+Use consistent spacing.
+
+Use soft shadows.
+
+Use Material Design principles.
+
+Use React Native Paper OR Native components.
+
+=========================================================
+PRIMARY COLORS
+=========================================================
+
+Primary Color
+
+#0056D2
+
+Success
+
+#22C55E
+
+Warning
+
+#F59E0B
+
+Danger
+
+#EF4444
+
+Background
+
+#F8FAFC
+
+Card
+
+#FFFFFF
+
+=========================================================
+TYPOGRAPHY
+=========================================================
+
+Use clear typography.
+
+Heading
+
+18-22
+
+Subheading
+
+16
+
+Body
+
+14
+
+Caption
+
+12
+
+Buttons should have bold text.
+
+=========================================================
+APP FLOW
+=========================================================
+
+Splash
 
 ↓
 
-Service
-
-↓
-
-Model
-
-↓
-
-MongoDB
-
-Never place business logic inside API routes.
-
-Use Mongoose Models.
-
-Use reusable services.
-
-Use TypeScript.
-
-Return consistent JSON responses.
-
-Create the backend module by module.
-
-Start by designing the Mobile API architecture.
-
-Wait for my approval before generating code.
-
-                     APTICON Website
-                          │
-          ┌───────────────┴───────────────┐
-          │                               │
-      Web Application                React Native App
-          │                               │
-          └───────────────┬───────────────┘
-                          │
-                 Next.js API Routes
-                          │
-                     MongoDB
-
-my reactnative application will be the fully seperate frontend that communicates with the existing backend via the new mobile APIs. The architecture will ensure that both the web application and the mobile app can coexist and share the same database without interfering with each other.
-
-The APIs you create will be consumed by a React Native (Expo + TypeScript) mobile application.
-
-This mobile application is designed for APTICON event staff only.
-
-It is NOT for attendees.
-
-The mobile application will be used during the conference by registration desk staff, volunteers, and event coordinators.
-
-The purpose of the application is to manage attendee operations quickly and efficiently during the event.
-
-=========================================================
-USER TYPES
-=========================================================
-
-1. Registration Desk Staff
-
-2. Food Counter Staff
-
-3. Kit Distribution Staff
-
-4. Certificate Counter Staff
-
-5. Event Admin
-
-=========================================================
-APPLICATION FLOW
-=========================================================
-
-Staff Login
+Login
 
 ↓
 
@@ -116,193 +109,97 @@ Dashboard
 
 ↓
 
-Search Attendee OR Scan QR Code
+Scan QR
 
 ↓
 
-Open Attendee Profile
+Attendee Details
 
 ↓
 
-Perform Required Action
+Perform Action
 
 ↓
 
-Save
-
-↓
-
-Ready for Next Attendee
+Back to Scanner
 
 =========================================================
-LOGIN
+BOTTOM NAVIGATION
 =========================================================
 
-Staff logs in using
+Dashboard
+
+Scanner
+
+Search
+
+Reports
+
+Profile
+
+=========================================================
+SPLASH SCREEN
+=========================================================
+
+Display
+
+APTICON Logo
+
+Conference Name
+
+Loading Indicator
+
+Version Number
+
+Automatically navigate after authentication check.
+
+=========================================================
+LOGIN SCREEN
+=========================================================
+
+Professional login screen.
+
+Fields
 
 Email
 
 Password
 
-JWT Authentication
+Remember Me
+
+Forgot Password
+
+Login Button
+
+Loading State
+
+Validation Messages
+
+Large login button.
+
+Disable button during API request.
 
 =========================================================
 DASHBOARD
 =========================================================
 
-Display live statistics.
+Show welcome message.
+
+Example
+
+Good Morning
+
+John Smith
+
+Registration Desk
+
+Display statistic cards.
 
 Total Registered
 
 Checked In
 
-ID Cards Issued
-
-Breakfast Distributed
-
-Lunch Distributed
-
-Dinner Distributed
-
-Kit Distributed
-
-Certificates Distributed
-
-=========================================================
-ATTENDEE SEARCH
-=========================================================
-
-Search attendee by
-
-Registration Number
-
-QR Code
-
-Mobile Number
-
-Email
-
-Full Name
-
-=========================================================
-QR SCANNER
-=========================================================
-
-The application includes a QR Scanner.
-
-Each attendee has a QR Code generated from the registration portal.
-
-When QR is scanned
-
-Return attendee details.
-
-=========================================================
-ATTENDEE PROFILE
-=========================================================
-
-Display
-
-Profile Photo
-
-Full Name
-
-Registration Number
-
-Registration Type
-
-Company
-
-Mobile Number
-
-Email
-
-Payment Status
-
-Badge Number
-
-Current Status
-
-=========================================================
-AVAILABLE ACTIONS
-=========================================================
-
-Check In
-
-Issue ID Card
-
-Issue Breakfast
-
-Issue Lunch
-
-Issue Dinner
-
-Issue Kit
-
-Issue Certificate
-
-Every action should be recorded.
-
-=========================================================
-BUSINESS RULES
-=========================================================
-
-An attendee can only
-
-Check In once
-
-Receive Breakfast once
-
-Receive Lunch once
-
-Receive Dinner once
-
-Receive Kit once
-
-Receive Certificate once
-
-Duplicate actions must be prevented.
-
-Return meaningful error messages.
-
-=========================================================
-ACTION LOG
-=========================================================
-
-Every action should store
-
-Attendee
-
-Staff Member
-
-Date
-
-Time
-
-Action Type
-
-Device (optional)
-
-=========================================================
-SEARCH
-=========================================================
-
-Support
-
-Pagination
-
-Sorting
-
-Filtering
-
-Fast Search
-
-=========================================================
-REPORTS
-=========================================================
-
-The application needs reports for
-
-Checked In
+ID Cards
 
 Breakfast
 
@@ -310,82 +207,364 @@ Lunch
 
 Dinner
 
-Kit Distribution
+Kit
 
-Certificate Distribution
+Certificate
+
+Each card should have
+
+Icon
+
+Count
+
+Label
+
+Cards should be responsive.
+
+Below statistics
+
+Quick Actions
+
+Scan QR
+
+Search Attendee
+
+Reports
 
 =========================================================
-PROFILE
+QR SCANNER SCREEN
 =========================================================
 
-Staff Profile
+Full-screen camera.
+
+Overlay rectangle.
+
+Instruction text
+
+"Place QR inside the frame"
+
+Flashlight button.
+
+Camera switch button.
+
+Cancel button.
+
+After successful scan
+
+Automatically fetch attendee.
+
+Navigate to attendee screen.
+
+=========================================================
+SEARCH SCREEN
+=========================================================
+
+Search bar at top.
+
+Search by
+
+Registration Number
+
+Mobile
+
+Email
+
+Name
+
+Display list.
+
+Each card
+
+Photo
+
+Name
+
+Registration Number
+
+Category
+
+Company
+
+Tap to open attendee.
+
+=========================================================
+ATTENDEE DETAILS
+=========================================================
+
+Large profile photo.
+
+Name
+
+Registration Number
+
+Category
+
+Company
+
+Email
+
+Phone
+
+Payment Status
+
+Badge Number
+
+Current Check-In Status
+
+Below profile display action buttons.
+
+Check In
+
+Issue ID Card
+
+Breakfast
+
+Lunch
+
+Dinner
+
+Kit
+
+Certificate
+
+Each action button should display
+
+Completed
+
+Pending
+
+Timestamp
+
+If already completed
+
+Disable button
+
+Show green completed badge.
+
+Confirmation dialog before action.
+
+=========================================================
+REPORTS
+=========================================================
+
+Display report cards.
+
+Check In
+
+Breakfast
+
+Lunch
+
+Dinner
+
+Kit
+
+Certificate
+
+Display
+
+Today's Count
+
+Total Count
+
+Export button
+
+=========================================================
+PROFILE SCREEN
+=========================================================
+
+Profile Photo
+
+Staff Name
+
+Email
+
+Role
 
 Change Password
+
+About
 
 Logout
 
 =========================================================
-OFFLINE SUPPORT
+COMMON COMPONENTS
 =========================================================
 
-Future Feature
+Primary Button
 
-Currently ignore offline mode.
+Secondary Button
+
+Loading Button
+
+Search Bar
+
+Stat Card
+
+Action Card
+
+Confirmation Dialog
+
+Avatar
+
+Empty State
+
+Error State
+
+Toast
+
+Loader
 
 =========================================================
-PUSH NOTIFICATIONS
+LOADING STATES
 =========================================================
 
-Future Feature
+Every API request must display loading.
 
-Do not implement.
+Use skeleton loaders where appropriate.
 
 =========================================================
-API RESPONSE FORMAT
+EMPTY STATES
 =========================================================
 
-Every API should return
+Professional empty states.
 
-{
-success: true,
-message: "",
-data: {}
-}
+No attendee found.
 
-Errors
+No reports available.
 
-{
-success: false,
-message: "",
-errors: []
-}
+No search results.
+
+=========================================================
+ERROR HANDLING
+=========================================================
+
+Friendly error messages.
+
+Retry button.
+
+Internet unavailable message.
+
+=========================================================
+FORMS
+=========================================================
+
+Use React Hook Form.
+
+Display inline validation.
+
+=========================================================
+API INTEGRATION
+=========================================================
+
+Use the existing backend APIs already provided.
+
+Do NOT modify API contracts.
+
+Use Axios.
+
+Use React Query.
+
+=========================================================
+STATE MANAGEMENT
+=========================================================
+
+Use Zustand.
+
+Authentication
+
+Current User
+
+Dashboard
+
+Settings
+
+=========================================================
+NAVIGATION
+=========================================================
+
+Use React Navigation.
+
+Authentication Stack
+
+Main Bottom Tabs
+
+Protected Routes
+
+=========================================================
+RESPONSIVE DESIGN
+=========================================================
+
+The application should work on
+
+5-inch devices
+
+6-inch devices
+
+7-inch devices
+
+Tablets
+
+=========================================================
+ACCESSIBILITY
+=========================================================
+
+Large touch targets.
+
+Readable fonts.
+
+Proper contrast.
+
+=========================================================
+PERFORMANCE
+=========================================================
+
+Avoid unnecessary re-renders.
+
+Lazy loading.
+
+Memoized components.
+
+Optimized FlatLists.
+
+=========================================================
+CODE QUALITY
+=========================================================
+
+Create reusable components.
+
+No duplicated UI.
+
+Proper folder structure.
+
+Strict TypeScript.
+
+Clean architecture.
 
 =========================================================
 IMPORTANT
 =========================================================
 
-Do not generate frontend code.
+Do NOT generate the entire application at once.
 
-Generate backend APIs only.
+Generate screen by screen.
 
-The backend already has
+For every screen provide
 
-Registration Module
+1. Folder Structure
 
-Abstract Module
+2. Component Structure
 
-Authentication
+3. UI Layout
 
-Payments
+4. React Native Code
 
-MongoDB
+5. Styling
 
-Reuse existing attendee registration data whenever possible.
+6. API Integration
 
-Create only the additional APIs required by the mobile application.
+7. Navigation
 
-Avoid duplicate data.
+8. Explanation
 
-Follow REST API best practices.
-
-Explain every endpoint before implementing it.
+Wait for my approval before generating the next screen.
