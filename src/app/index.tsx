@@ -1,98 +1,66 @@
-import * as Device from 'expo-device';
-import { Platform, StyleSheet } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import Constants from 'expo-constants';
+import { Redirect } from 'expo-router';
+import { ActivityIndicator, StyleSheet, Text, View } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
-import { AnimatedIcon } from '@/components/animated-icon';
-import { HintRow } from '@/components/hint-row';
-import { ThemedText } from '@/components/themed-text';
-import { ThemedView } from '@/components/themed-view';
-import { WebBadge } from '@/components/web-badge';
-import { BottomTabInset, MaxContentWidth, Spacing } from '@/constants/theme';
+import { AppLogo } from '@/components/branding/AppLogo';
+import { useAuthStore } from '@/store/authStore';
+import { colors, spacing, typography } from '@/theme/tokens';
 
-function getDevMenuHint() {
-  if (Platform.OS === 'web') {
-    return <ThemedText type="small">use browser devtools</ThemedText>;
-  }
-  if (Device.isDevice) {
-    return (
-      <ThemedText type="small">
-        shake device or press <ThemedText type="code">m</ThemedText> in terminal
-      </ThemedText>
+export default function Splash() {
+  const status = useAuthStore((s) => s.status);
+  const insets = useSafeAreaInsets();
+  const version = Constants.expoConfig?.version ?? '1.0.0';
+
+  if (status !== 'hydrating') {
+    return status === 'authenticated' ? (
+      <Redirect href="/(tabs)/dashboard" />
+    ) : (
+      <Redirect href="/(auth)/login" />
     );
   }
-  const shortcut = Platform.OS === 'android' ? 'cmd+m (or ctrl+m)' : 'cmd+d';
+
   return (
-    <ThemedText type="small">
-      press <ThemedText type="code">{shortcut}</ThemedText>
-    </ThemedText>
-  );
-}
-
-export default function HomeScreen() {
-  return (
-    <ThemedView style={styles.container}>
-      <SafeAreaView style={styles.safeArea}>
-        <ThemedView style={styles.heroSection}>
-          <AnimatedIcon />
-          <ThemedText type="title" style={styles.title}>
-            Welcome to&nbsp;Expo
-          </ThemedText>
-        </ThemedView>
-
-        <ThemedText type="code" style={styles.code}>
-          get started
-        </ThemedText>
-
-        <ThemedView type="backgroundElement" style={styles.stepContainer}>
-          <HintRow
-            title="Try editing"
-            hint={<ThemedText type="code">src/app/index.tsx</ThemedText>}
-          />
-          <HintRow title="Dev tools" hint={getDevMenuHint()} />
-          <HintRow
-            title="Fresh start"
-            hint={<ThemedText type="code">npm run reset-project</ThemedText>}
-          />
-        </ThemedView>
-
-        {Platform.OS === 'web' && <WebBadge />}
-      </SafeAreaView>
-    </ThemedView>
+    <View style={styles.container}>
+      <View style={styles.content}>
+        <AppLogo size={88} tone="onPrimary" />
+        <Text style={styles.title}>APTICON</Text>
+        <Text style={styles.subtitle}>2026 Conference · Staff App</Text>
+        <ActivityIndicator color={colors.white} size="large" style={styles.loader} />
+      </View>
+      <Text style={[styles.version, { bottom: insets.bottom + spacing.xxl }]}>Version {version}</Text>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    flexDirection: 'row',
-  },
-  safeArea: {
-    flex: 1,
-    paddingHorizontal: Spacing.four,
-    alignItems: 'center',
-    gap: Spacing.three,
-    paddingBottom: BottomTabInset + Spacing.three,
-    maxWidth: MaxContentWidth,
-  },
-  heroSection: {
+    backgroundColor: colors.primary,
     alignItems: 'center',
     justifyContent: 'center',
-    flex: 1,
-    paddingHorizontal: Spacing.four,
-    gap: Spacing.four,
+  },
+  content: {
+    alignItems: 'center',
+    gap: spacing.sm,
   },
   title: {
-    textAlign: 'center',
+    ...typography.headingLarge,
+    color: colors.white,
+    fontSize: 28,
+    letterSpacing: 1,
+    marginTop: spacing.sm,
   },
-  code: {
-    textTransform: 'uppercase',
+  subtitle: {
+    ...typography.body,
+    color: 'rgba(255, 255, 255, 0.8)',
   },
-  stepContainer: {
-    gap: Spacing.three,
-    alignSelf: 'stretch',
-    paddingHorizontal: Spacing.three,
-    paddingVertical: Spacing.four,
-    borderRadius: Spacing.four,
+  loader: {
+    marginTop: spacing.lg,
+  },
+  version: {
+    ...typography.caption,
+    color: 'rgba(255, 255, 255, 0.6)',
+    position: 'absolute',
   },
 });
