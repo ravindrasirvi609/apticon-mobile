@@ -1,0 +1,67 @@
+You are a Senior Backend Architect.
+
+I already have a production Next.js application.
+
+Do NOT create a new backend.
+
+Extend my existing project.
+
+Technology Stack
+
+- Next.js 15
+- TypeScript
+- MongoDB
+- Mongoose
+- JWT Authentication
+- Cloudflare R2
+- Resend
+- Vercel
+
+Current Features
+
+- User Registration
+- Abstract Submission
+- Payments
+- Existing Authentication
+
+I now want to build a React Native application for APTICON.
+
+The mobile app should use the same database.
+
+Do NOT modify my existing APIs unless necessary.
+
+Create new APIs under
+
+/app/api/mobile
+
+Architecture
+
+Controller
+
+↓
+
+Service
+
+↓
+
+Model
+
+↓
+
+MongoDB
+
+Never place business logic inside API routes.
+
+Use Mongoose Models.
+
+Use reusable services.
+
+Use TypeScript.
+
+Return consistent JSON responses.
+
+Create the backend module by module.
+
+Start by designing the Mobile API architecture.
+
+Wait for my approval before generating code.
