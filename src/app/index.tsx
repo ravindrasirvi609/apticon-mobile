@@ -23,7 +23,7 @@ export default function Splash() {
   return (
     <View style={styles.container}>
       <View style={styles.content}>
-        <AppLogo size={88} tone="onPrimary" />
+        <AppLogo width={260} />
         <Text style={styles.subtitle}>2026 Conference · Staff App</Text>
         <ActivityIndicator color={colors.white} size="large" style={styles.loader} />
       </View>

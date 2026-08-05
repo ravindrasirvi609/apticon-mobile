@@ -1,31 +1,26 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { Image, StyleSheet } from 'react-native';
 
-import { colors } from '@/theme/tokens';
+import { radii } from '@/theme/tokens';
+
+const LOGO_ASPECT_RATIO = 1536 / 1024;
 
 type AppLogoProps = {
-  size?: number;
-  tone?: 'onPrimary' | 'onLight';
+  width?: number;
 };
 
-export function AppLogo({ size = 72, tone = 'onPrimary' }: AppLogoProps) {
-  const isOnPrimary = tone === 'onPrimary';
-  const aptiColor = isOnPrimary ? colors.white : colors.primary;
-  const fontSize = size * 0.42;
-
+export function AppLogo({ width = 220 }: AppLogoProps) {
   return (
-    <View style={styles.row}>
-      <Text style={[styles.word, { fontSize, color: aptiColor }]}>APTI</Text>
-      <Text style={[styles.word, { fontSize, color: colors.accent }]}>CON</Text>
-    </View>
+    <Image
+      source={require('../../../assets/images/APTICON_LOGO.png')}
+      accessibilityLabel="APTICON 2026"
+      resizeMode="contain"
+      style={[styles.logo, { width, height: width / LOGO_ASPECT_RATIO }]}
+    />
   );
 }
 
 const styles = StyleSheet.create({
-  row: {
-    flexDirection: 'row',
-  },
-  word: {
-    fontFamily: 'PlayfairDisplay_900Black',
-    letterSpacing: 0.5,
+  logo: {
+    borderRadius: radii.md,
   },
 });

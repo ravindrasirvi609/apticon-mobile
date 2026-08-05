@@ -70,7 +70,7 @@ export default function LoginScreen() {
           keyboardShouldPersistTaps="handled"
         >
           <View style={styles.header}>
-            <AppLogo size={64} tone="onLight" />
+            <AppLogo width={220} />
             <Text style={styles.title}>Welcome back</Text>
             <Text style={styles.subtitle}>Sign in to the APTICON staff console</Text>
           </View>
