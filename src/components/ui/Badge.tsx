@@ -2,7 +2,7 @@ import { StyleSheet, Text, View } from 'react-native';
 
 import { colors, radii, spacing, typography } from '@/theme/tokens';
 
-type BadgeVariant = 'success' | 'warning' | 'danger' | 'neutral';
+type BadgeVariant = 'success' | 'warning' | 'danger' | 'neutral' | 'accent';
 
 type BadgeProps = {
   label: string;
@@ -35,6 +35,7 @@ const variantStyles = StyleSheet.create({
   warning: { backgroundColor: colors.warningMuted },
   danger: { backgroundColor: colors.dangerMuted },
   neutral: { backgroundColor: colors.border },
+  accent: { backgroundColor: colors.accentMuted },
 });
 
 const variantTextStyles = StyleSheet.create({
@@ -42,4 +43,5 @@ const variantTextStyles = StyleSheet.create({
   warning: { color: colors.warning },
   danger: { color: colors.danger },
   neutral: { color: colors.textSecondary },
+  accent: { color: colors.text },
 });

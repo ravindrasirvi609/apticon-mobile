@@ -60,6 +60,8 @@ export type AttendeeSearchItem = {
   paymentStatus: PaymentStatus;
   photoUrl?: string;
   createdAt: string;
+  checkedInAt?: string | null;
+  kitIssuedAt?: string | null;
 };
 
 export type AttendeeSearchField = 'all' | 'registrationCode' | 'email' | 'phone' | 'fullName';

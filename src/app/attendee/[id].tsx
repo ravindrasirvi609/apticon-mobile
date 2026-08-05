@@ -1,5 +1,6 @@
 import { Ionicons } from '@expo/vector-icons';
 import * as Device from 'expo-device';
+import * as Haptics from 'expo-haptics';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { useState } from 'react';
 import { ScrollView, StyleSheet, Text, View } from 'react-native';
@@ -50,11 +51,13 @@ export default function AttendeeDetailScreen() {
         onSuccess: () => {
           setPendingAction(null);
           showToast(`${action.title} recorded`, 'success');
+          Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
         },
         onError: (err) => {
           setPendingAction(null);
           const apiError = err as ApiError;
           showToast(apiError.message ?? 'Something went wrong', apiError.status === 409 ? 'info' : 'error');
+          Haptics.notificationAsync(Haptics.NotificationFeedbackType.Warning);
         },
       },
     );

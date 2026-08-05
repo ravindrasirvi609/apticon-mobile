@@ -29,6 +29,12 @@ export function AttendeeResultCard({ attendee, onPress }: AttendeeResultCardProp
               {attendee.institution}
             </Text>
           ) : null}
+          {(attendee.checkedInAt || attendee.kitIssuedAt) && (
+            <View style={styles.statusRow}>
+              {attendee.checkedInAt ? <Badge label="Checked in" variant="success" /> : null}
+              {attendee.kitIssuedAt ? <Badge label="Kit issued" variant="accent" /> : null}
+            </View>
+          )}
         </View>
         <Badge label={capitalize(attendee.category)} />
       </Card>
@@ -45,6 +51,11 @@ const styles = StyleSheet.create({
   info: {
     flex: 1,
     gap: 2,
+  },
+  statusRow: {
+    flexDirection: 'row',
+    gap: spacing.xs,
+    marginTop: 2,
   },
   name: {
     ...typography.subheading,

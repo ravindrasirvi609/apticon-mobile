@@ -1,5 +1,6 @@
 import { useInfiniteQuery, useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
+import type { ApiError } from '@/api/client';
 import {
   fetchAttendeeByCode,
   fetchAttendeeById,
@@ -54,6 +55,12 @@ export function useRecordAction(id: string) {
       queryClient.invalidateQueries({ queryKey: ['attendees', 'byId', id] });
       queryClient.invalidateQueries({ queryKey: ['attendees', 'history', id] });
       queryClient.invalidateQueries({ queryKey: ['dashboard', 'stats'] });
+    },
+    onError: (err) => {
+      if ((err as ApiError).status === 409) {
+        queryClient.invalidateQueries({ queryKey: ['attendees', 'byId', id] });
+        queryClient.invalidateQueries({ queryKey: ['attendees', 'history', id] });
+      }
     },
   });
 }

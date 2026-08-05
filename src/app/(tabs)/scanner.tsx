@@ -1,4 +1,5 @@
 import { CameraView, useCameraPermissions, type BarcodeScanningResult } from 'expo-camera';
+import * as Haptics from 'expo-haptics';
 import { useFocusEffect, useRouter } from 'expo-router';
 import { useCallback, useRef, useState } from 'react';
 import { ActivityIndicator, Linking, StyleSheet, Text, View } from 'react-native';
@@ -41,6 +42,7 @@ export default function ScannerScreen() {
       if (locked.current || !data) return;
       locked.current = true;
       setIsResolving(true);
+      Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
       try {
         const result = await fetchAttendeeByCode(data);
         router.push(`/attendee/${result.registration._id}`);
