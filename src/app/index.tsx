@@ -24,7 +24,6 @@ export default function Splash() {
     <View style={styles.container}>
       <View style={styles.content}>
         <AppLogo size={88} tone="onPrimary" />
-        <Text style={styles.title}>APTICON</Text>
         <Text style={styles.subtitle}>2026 Conference · Staff App</Text>
         <ActivityIndicator color={colors.white} size="large" style={styles.loader} />
       </View>
@@ -44,16 +43,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     gap: spacing.sm,
   },
-  title: {
-    ...typography.headingLarge,
-    color: colors.white,
-    fontSize: 28,
-    letterSpacing: 1,
-    marginTop: spacing.sm,
-  },
   subtitle: {
     ...typography.body,
     color: 'rgba(255, 255, 255, 0.8)',
+    marginTop: spacing.sm,
   },
   loader: {
     marginTop: spacing.lg,

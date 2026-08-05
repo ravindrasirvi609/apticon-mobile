@@ -37,13 +37,13 @@ export const radii = {
 } as const;
 
 export const typography = {
-  heading: { fontSize: 20, fontWeight: '700' as const, color: colors.text },
-  headingLarge: { fontSize: 22, fontWeight: '700' as const, color: colors.text },
-  subheading: { fontSize: 16, fontWeight: '600' as const, color: colors.text },
-  body: { fontSize: 14, fontWeight: '400' as const, color: colors.text },
-  bodyBold: { fontSize: 14, fontWeight: '600' as const, color: colors.text },
-  caption: { fontSize: 12, fontWeight: '400' as const, color: colors.textSecondary },
-  button: { fontSize: 15, fontWeight: '700' as const },
+  heading: { fontSize: 20, fontFamily: 'PlayfairDisplay_700Bold', color: colors.text },
+  headingLarge: { fontSize: 22, fontFamily: 'PlayfairDisplay_700Bold', color: colors.text },
+  subheading: { fontSize: 16, fontFamily: 'PlayfairDisplay_700Bold', color: colors.text },
+  body: { fontSize: 14, fontFamily: 'Inter_400Regular', color: colors.text },
+  bodyBold: { fontSize: 14, fontFamily: 'Inter_600SemiBold', color: colors.text },
+  caption: { fontSize: 12, fontFamily: 'Inter_400Regular', color: colors.textSecondary },
+  button: { fontSize: 15, fontFamily: 'Inter_700Bold' },
 } as const;
 
 export const shadow = {
