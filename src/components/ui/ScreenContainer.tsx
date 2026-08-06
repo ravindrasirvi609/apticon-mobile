@@ -14,7 +14,7 @@ type ScreenContainerProps = {
 export function ScreenContainer({ children, style, edges = ['top'], padded = true }: ScreenContainerProps) {
   return (
     <SafeAreaView edges={edges} style={styles.safeArea}>
-      <View style={[padded && styles.padded, style]}>{children}</View>
+      <View style={[styles.flexBase, padded && styles.padded, style]}>{children}</View>
     </SafeAreaView>
   );
 }
@@ -24,8 +24,10 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: colors.background,
   },
-  padded: {
+  flexBase: {
     flex: 1,
+  },
+  padded: {
     paddingHorizontal: spacing.lg,
   },
 });
