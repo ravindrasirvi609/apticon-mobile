@@ -5,6 +5,7 @@ import { Badge } from '@/components/ui/Badge';
 import { Card } from '@/components/ui/Card';
 import type { AttendeeSearchItem } from '@/api/types';
 import { colors, spacing, typography } from '@/theme/tokens';
+import { STATUS_BADGE } from '@/utils/registrationStatus';
 import { capitalize } from '@/utils/text';
 
 type AttendeeResultCardProps = {
@@ -29,8 +30,11 @@ export function AttendeeResultCard({ attendee, onPress }: AttendeeResultCardProp
               {attendee.institution}
             </Text>
           ) : null}
-          {(attendee.checkedInAt || attendee.kitIssuedAt) && (
+          {(attendee.checkedInAt || attendee.kitIssuedAt || attendee.status !== 'approved') && (
             <View style={styles.statusRow}>
+              {attendee.status !== 'approved' ? (
+                <Badge label={STATUS_BADGE[attendee.status].label} variant={STATUS_BADGE[attendee.status].variant} />
+              ) : null}
               {attendee.checkedInAt ? <Badge label="Checked in" variant="success" /> : null}
               {attendee.kitIssuedAt ? <Badge label="Kit issued" variant="accent" /> : null}
             </View>

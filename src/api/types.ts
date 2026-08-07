@@ -86,6 +86,9 @@ export type AttendeeRegistration = AttendeeSearchItem & {
   city?: string;
   state?: string;
   feeAmount?: number;
+  // Detail-only: the mobile search-list projection (ATTENDEE_LIST_FIELDS on the backend) omits
+  // this field, so it's only ever present on a single-attendee fetch (by id or by code).
+  reviewNote?: string;
 };
 
 export type ActionStamp = { at: string; by: string } | null;

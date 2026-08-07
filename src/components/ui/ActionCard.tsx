@@ -13,10 +13,21 @@ type ActionCardProps = {
   completedAt?: string;
   completedBy?: string;
   loading?: boolean;
+  disabled?: boolean;
+  disabledReason?: string;
   onPress: () => void;
 };
 
-export function ActionCard({ icon, title, completedAt, completedBy, loading, onPress }: ActionCardProps) {
+export function ActionCard({
+  icon,
+  title,
+  completedAt,
+  completedBy,
+  loading,
+  disabled,
+  disabledReason,
+  onPress,
+}: ActionCardProps) {
   const isCompleted = !!completedAt;
 
   return (
@@ -33,12 +44,12 @@ export function ActionCard({ icon, title, completedAt, completedBy, loading, onP
               {completedBy ? ` · ${completedBy}` : ''}
             </Text>
           ) : (
-            <Text style={styles.meta}>Not recorded yet</Text>
+            <Text style={styles.meta}>{disabled ? (disabledReason ?? 'Not available yet') : 'Not recorded yet'}</Text>
           )}
         </View>
         {isCompleted && <Badge label="Done" variant="success" />}
       </View>
-      {!isCompleted && (
+      {!isCompleted && !disabled && (
         <Button title="Mark done" variant="primary" loading={loading} onPress={onPress} style={styles.button} />
       )}
     </Card>

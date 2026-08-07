@@ -23,6 +23,7 @@ import { useToast } from '@/components/ui/Toast';
 import { useAttendeeById, useRecordAction } from '@/hooks/useAttendee';
 import { colors, spacing, typography } from '@/theme/tokens';
 import { formatDateTime } from '@/utils/formatDate';
+import { STATUS_BADGE } from '@/utils/registrationStatus';
 import { capitalize } from '@/utils/text';
 
 const MEAL_DAYS = [1, 2, 3];
@@ -93,6 +94,9 @@ export default function AttendeeDetailScreen() {
   const lunchToday = status.lunch.find((entry) => entry.day === mealDay);
   const dinnerToday = status.dinner.find((entry) => entry.day === mealDay);
 
+  const isApproved = registration.status === 'approved';
+  const actionDisabledReason = `Registration not approved (${STATUS_BADGE[registration.status].label.toLowerCase()})`;
+
   return (
     <ScreenContainer edges={['top', 'bottom']} padded={false}>
       <View style={styles.topBar}>
@@ -108,6 +112,7 @@ export default function AttendeeDetailScreen() {
             <Text style={styles.badgeChipText}>Badge No. {registration.registrationCode}</Text>
           </View>
           <View style={styles.tagRow}>
+            <Badge label={STATUS_BADGE[registration.status].label} variant={STATUS_BADGE[registration.status].variant} />
             <Badge label={capitalize(registration.category)} />
             {registration.institution ? <Badge label={registration.institution} variant="neutral" /> : null}
           </View>
@@ -131,12 +136,24 @@ export default function AttendeeDetailScreen() {
 
         <Text style={styles.sectionTitle}>Actions</Text>
 
+        {!isApproved && (
+          <View style={styles.blockedNotice}>
+            <Ionicons name="alert-circle-outline" size={18} color={colors.warning} />
+            <Text style={styles.blockedNoticeText}>
+              Actions are disabled until this registration is approved.
+              {registration.status === 'rejected' && registration.reviewNote ? `\n${registration.reviewNote}` : ''}
+            </Text>
+          </View>
+        )}
+
         <ActionCard
           icon="log-in-outline"
           title="Check In"
           completedAt={status.checkIn?.at}
           completedBy={status.checkIn?.by}
           loading={recordAction.isPending && pendingAction?.actionType === 'check_in'}
+          disabled={!isApproved}
+          disabledReason={actionDisabledReason}
           onPress={() =>
             setPendingAction({
               actionType: 'check_in',
@@ -152,6 +169,8 @@ export default function AttendeeDetailScreen() {
           completedAt={status.idCard?.at}
           completedBy={status.idCard?.by}
           loading={recordAction.isPending && pendingAction?.actionType === 'id_card'}
+          disabled={!isApproved}
+          disabledReason={actionDisabledReason}
           onPress={() =>
             setPendingAction({
               actionType: 'id_card',
@@ -176,6 +195,8 @@ export default function AttendeeDetailScreen() {
           completedAt={breakfastToday?.at}
           completedBy={breakfastToday?.by}
           loading={recordAction.isPending && pendingAction?.actionType === 'breakfast'}
+          disabled={!isApproved}
+          disabledReason={actionDisabledReason}
           onPress={() =>
             setPendingAction({
               actionType: 'breakfast',
@@ -192,6 +213,8 @@ export default function AttendeeDetailScreen() {
           completedAt={lunchToday?.at}
           completedBy={lunchToday?.by}
           loading={recordAction.isPending && pendingAction?.actionType === 'lunch'}
+          disabled={!isApproved}
+          disabledReason={actionDisabledReason}
           onPress={() =>
             setPendingAction({
               actionType: 'lunch',
@@ -208,6 +231,8 @@ export default function AttendeeDetailScreen() {
           completedAt={dinnerToday?.at}
           completedBy={dinnerToday?.by}
           loading={recordAction.isPending && pendingAction?.actionType === 'dinner'}
+          disabled={!isApproved}
+          disabledReason={actionDisabledReason}
           onPress={() =>
             setPendingAction({
               actionType: 'dinner',
@@ -224,6 +249,8 @@ export default function AttendeeDetailScreen() {
           completedAt={status.kit?.at}
           completedBy={status.kit?.by}
           loading={recordAction.isPending && pendingAction?.actionType === 'kit'}
+          disabled={!isApproved}
+          disabledReason={actionDisabledReason}
           onPress={() =>
             setPendingAction({ actionType: 'kit', title: 'Kit', message: 'Confirm kit distribution?' })
           }
@@ -235,6 +262,8 @@ export default function AttendeeDetailScreen() {
           completedAt={status.certificate?.at}
           completedBy={status.certificate?.by}
           loading={recordAction.isPending && pendingAction?.actionType === 'certificate'}
+          disabled={!isApproved}
+          disabledReason={actionDisabledReason}
           onPress={() =>
             setPendingAction({
               actionType: 'certificate',
@@ -303,6 +332,19 @@ const styles = StyleSheet.create({
   sectionTitle: {
     ...typography.subheading,
     marginTop: spacing.sm,
+  },
+  blockedNotice: {
+    flexDirection: 'row',
+    alignItems: 'flex-start',
+    gap: spacing.sm,
+    backgroundColor: colors.warningMuted,
+    borderRadius: 12,
+    padding: spacing.md,
+  },
+  blockedNoticeText: {
+    ...typography.caption,
+    color: colors.warning,
+    flex: 1,
   },
   mealHeader: {
     gap: spacing.sm,
