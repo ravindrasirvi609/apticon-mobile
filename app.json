@@ -2,7 +2,7 @@
   "expo": {
     "name": "apticon",
     "slug": "apticon",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "scheme": "apticon",
@@ -26,7 +26,7 @@
         "android.permission.CAMERA",
         "android.permission.RECORD_AUDIO"
       ],
-      "package": "com.ravindra609.apticon"
+      "package": "com.apticon.apticonstaff"
     },
     "web": {
       "output": "static",
