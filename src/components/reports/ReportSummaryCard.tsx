@@ -1,12 +1,12 @@
-import { Ionicons } from '@expo/vector-icons';
-import { Pressable, StyleSheet, Text, View } from 'react-native';
+import { Ionicons } from "@expo/vector-icons";
+import { Pressable, StyleSheet, Text, View } from "react-native";
 
-import type { ReportType } from '@/api/types';
-import { Card } from '@/components/ui/Card';
-import { Skeleton } from '@/components/ui/Skeleton';
-import { useReport } from '@/hooks/useReports';
-import { colors, radii, spacing, typography } from '@/theme/tokens';
-import { isToday } from '@/utils/formatDate';
+import type { ReportType } from "@/api/types";
+import { Card } from "@/components/ui/Card";
+import { Skeleton } from "@/components/ui/Skeleton";
+import { useReport } from "@/hooks/useReports";
+import { colors, radii, spacing, typography } from "@/theme/tokens";
+import { isToday } from "@/utils/formatDate";
 
 type ReportSummaryCardProps = {
   type: ReportType;
@@ -17,9 +17,19 @@ type ReportSummaryCardProps = {
   onPress: () => void;
 };
 
-export function ReportSummaryCard({ type, label, icon, day, active, onPress }: ReportSummaryCardProps) {
+export function ReportSummaryCard({
+  type,
+  label,
+  icon,
+  day,
+  active,
+  onPress,
+}: ReportSummaryCardProps) {
   const { data, isPending } = useReport(type, { day, limit: 100 });
-  const todayCount = data ? data.items.filter((item) => isToday(item.at)).length : 0;
+  const items = Array.isArray(data?.items) ? data.items : [];
+  const todayCount = items.filter(
+    (item) => typeof item?.at === "string" && isToday(item.at),
+  ).length;
 
   return (
     <Pressable accessibilityRole="button" onPress={onPress} style={styles.wrap}>
@@ -45,7 +55,7 @@ export function ReportSummaryCard({ type, label, icon, day, active, onPress }: R
 
 const styles = StyleSheet.create({
   wrap: {
-    flexBasis: '48%',
+    flexBasis: "48%",
     flexGrow: 1,
   },
   card: {
@@ -60,8 +70,8 @@ const styles = StyleSheet.create({
     height: 32,
     borderRadius: radii.md,
     backgroundColor: colors.primaryMuted,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
     marginBottom: spacing.xs,
   },
   label: {
