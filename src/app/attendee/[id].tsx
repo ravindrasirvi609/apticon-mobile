@@ -93,6 +93,10 @@ export default function AttendeeDetailScreen() {
   const breakfastToday = status.breakfast.find((entry) => entry.day === mealDay);
   const lunchToday = status.lunch.find((entry) => entry.day === mealDay);
   const dinnerToday = status.dinner.find((entry) => entry.day === mealDay);
+  // Kit is a one-time action, like ID card issuance. Some API responses expose
+  // the existing issuance on the registration rather than status.kit.
+  const kitIssuedAt = status.kit?.at ?? registration.kitIssuedAt ?? undefined;
+  const kitIssuedBy = status.kit?.by;
 
   const isApproved = registration.status === 'approved';
   const actionDisabledReason = `Registration not approved (${STATUS_BADGE[registration.status].label.toLowerCase()})`;
@@ -246,8 +250,8 @@ export default function AttendeeDetailScreen() {
         <ActionCard
           icon="bag-handle-outline"
           title="Kit"
-          completedAt={status.kit?.at}
-          completedBy={status.kit?.by}
+          completedAt={kitIssuedAt}
+          completedBy={kitIssuedBy}
           loading={recordAction.isPending && pendingAction?.actionType === 'kit'}
           disabled={!isApproved}
           disabledReason={actionDisabledReason}
