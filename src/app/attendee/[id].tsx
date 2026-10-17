@@ -184,6 +184,19 @@ export default function AttendeeDetailScreen() {
           }
         />
 
+        <ActionCard
+          icon="bag-handle-outline"
+          title="Kit"
+          completedAt={kitIssuedAt}
+          completedBy={kitIssuedBy}
+          loading={recordAction.isPending && pendingAction?.actionType === 'kit'}
+          disabled={!isApproved}
+          disabledReason={actionDisabledReason}
+          onPress={() =>
+            setPendingAction({ actionType: 'kit', title: 'Kit', message: 'Confirm kit distribution?' })
+          }
+        />
+
         <View style={styles.mealHeader}>
           <Text style={styles.mealTitle}>Meals</Text>
           <View style={styles.dayChips}>
@@ -244,19 +257,6 @@ export default function AttendeeDetailScreen() {
               title: 'Dinner',
               message: `Confirm dinner for Day ${mealDay}?`,
             })
-          }
-        />
-
-        <ActionCard
-          icon="bag-handle-outline"
-          title="Kit"
-          completedAt={kitIssuedAt}
-          completedBy={kitIssuedBy}
-          loading={recordAction.isPending && pendingAction?.actionType === 'kit'}
-          disabled={!isApproved}
-          disabledReason={actionDisabledReason}
-          onPress={() =>
-            setPendingAction({ actionType: 'kit', title: 'Kit', message: 'Confirm kit distribution?' })
           }
         />
 
