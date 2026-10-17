@@ -1,18 +1,26 @@
-import { useEffect, useState } from 'react';
-import { Controller, useForm } from 'react-hook-form';
-import { KeyboardAvoidingView, Platform, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { useEffect, useState } from "react";
+import { Controller, useForm } from "react-hook-form";
+import {
+  Image,
+  KeyboardAvoidingView,
+  Platform,
+  ScrollView,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
 
-import { AppLogo } from '@/components/branding/AppLogo';
-import { Button } from '@/components/ui/Button';
-import { Checkbox } from '@/components/ui/Checkbox';
-import { IconButton } from '@/components/ui/IconButton';
-import { ScreenContainer } from '@/components/ui/ScreenContainer';
-import { TextField } from '@/components/ui/TextField';
-import { useToast } from '@/components/ui/Toast';
-import type { ApiError } from '@/api/client';
-import { useLogin } from '@/hooks/useAuth';
-import { useSettingsStore } from '@/store/settingsStore';
-import { colors, spacing, typography } from '@/theme/tokens';
+import type { ApiError } from "@/api/client";
+import { AppLogo } from "@/components/branding/AppLogo";
+import { Button } from "@/components/ui/Button";
+import { Checkbox } from "@/components/ui/Checkbox";
+import { IconButton } from "@/components/ui/IconButton";
+import { ScreenContainer } from "@/components/ui/ScreenContainer";
+import { TextField } from "@/components/ui/TextField";
+import { useToast } from "@/components/ui/Toast";
+import { useLogin } from "@/hooks/useAuth";
+import { useSettingsStore } from "@/store/settingsStore";
+import { colors, spacing, typography } from "@/theme/tokens";
 
 type LoginFormValues = {
   email: string;
@@ -27,7 +35,9 @@ export default function LoginScreen() {
   const rememberedEmail = useSettingsStore((s) => s.rememberedEmail);
   const setRememberedEmail = useSettingsStore((s) => s.setRememberedEmail);
 
-  const [rememberMeOverride, setRememberMeOverride] = useState<boolean | null>(null);
+  const [rememberMeOverride, setRememberMeOverride] = useState<boolean | null>(
+    null,
+  );
   const rememberMe = rememberMeOverride ?? !!rememberedEmail;
   const [showPassword, setShowPassword] = useState(false);
 
@@ -37,11 +47,11 @@ export default function LoginScreen() {
     setValue,
     formState: { errors },
   } = useForm<LoginFormValues>({
-    defaultValues: { email: '', password: '' },
+    defaultValues: { email: "", password: "" },
   });
 
   useEffect(() => {
-    if (rememberedEmail) setValue('email', rememberedEmail);
+    if (rememberedEmail) setValue("email", rememberedEmail);
   }, [rememberedEmail, setValue]);
 
   const onSubmit = (values: LoginFormValues) => {
@@ -52,18 +62,20 @@ export default function LoginScreen() {
           setRememberedEmail(rememberMe ? values.email.trim() : null);
         },
         onError: (error) => {
-          const message = (error as ApiError).message ?? 'Unable to log in. Please try again.';
-          showToast(message, 'error');
+          const message =
+            (error as ApiError).message ??
+            "Unable to log in. Please try again.";
+          showToast(message, "error");
         },
       },
     );
   };
 
   return (
-    <ScreenContainer edges={['top', 'bottom']}>
+    <ScreenContainer edges={["top", "bottom"]}>
       <KeyboardAvoidingView
         style={styles.flex}
-        behavior={Platform.OS === 'ios' ? 'padding' : undefined}
+        behavior={Platform.OS === "ios" ? "padding" : undefined}
       >
         <ScrollView
           contentContainerStyle={styles.scrollContent}
@@ -72,7 +84,9 @@ export default function LoginScreen() {
           <View style={styles.header}>
             <AppLogo width={220} />
             <Text style={styles.title}>Welcome back</Text>
-            <Text style={styles.subtitle}>Sign in to the APTICON staff console</Text>
+            <Text style={styles.subtitle}>
+              Sign in to the APTICON staff console
+            </Text>
           </View>
 
           <View style={styles.form}>
@@ -80,8 +94,11 @@ export default function LoginScreen() {
               control={control}
               name="email"
               rules={{
-                required: 'Email is required',
-                pattern: { value: EMAIL_PATTERN, message: 'Enter a valid email address' },
+                required: "Email is required",
+                pattern: {
+                  value: EMAIL_PATTERN,
+                  message: "Enter a valid email address",
+                },
               }}
               render={({ field }) => (
                 <TextField
@@ -100,8 +117,11 @@ export default function LoginScreen() {
               control={control}
               name="password"
               rules={{
-                required: 'Password is required',
-                minLength: { value: 6, message: 'Password must be at least 6 characters' },
+                required: "Password is required",
+                minLength: {
+                  value: 6,
+                  message: "Password must be at least 6 characters",
+                },
               }}
               render={({ field }) => (
                 <TextField
@@ -115,9 +135,11 @@ export default function LoginScreen() {
                   onSubmitEditing={handleSubmit(onSubmit)}
                   rightAccessory={
                     <IconButton
-                      name={showPassword ? 'eye-off-outline' : 'eye-outline'}
+                      name={showPassword ? "eye-off-outline" : "eye-outline"}
                       onPress={() => setShowPassword((prev) => !prev)}
-                      accessibilityLabel={showPassword ? 'Hide password' : 'Show password'}
+                      accessibilityLabel={
+                        showPassword ? "Hide password" : "Show password"
+                      }
                       size={20}
                       background="transparent"
                     />
@@ -127,12 +149,19 @@ export default function LoginScreen() {
             />
 
             <View style={styles.row}>
-              <Checkbox label="Remember me" checked={rememberMe} onToggle={() => setRememberMeOverride(!rememberMe)} />
+              <Checkbox
+                label="Remember me"
+                checked={rememberMe}
+                onToggle={() => setRememberMeOverride(!rememberMe)}
+              />
               <Text
                 style={styles.link}
                 accessibilityRole="link"
                 onPress={() =>
-                  showToast('Ask your event coordinator to reset your password.', 'info')
+                  showToast(
+                    "Ask your event coordinator to reset your password.",
+                    "info",
+                  )
                 }
               >
                 Forgot password?
@@ -146,6 +175,23 @@ export default function LoginScreen() {
               style={styles.submit}
             />
           </View>
+
+          <View
+            style={styles.poweredBy}
+            accessibilityLabel="Powered by Operant Pharmacy Federation"
+          >
+            <Text style={styles.poweredByLabel}>Powered by</Text>
+
+            <Image
+              source={require("../../../assets/images/OPF_LOGO.png")}
+              accessibilityLabel="Operant Pharmacy Federation logo"
+              resizeMode="contain"
+              style={styles.opfLogo}
+            />
+            <Text style={styles.poweredByName}>
+              Operant Pharmacy Federation
+            </Text>
+          </View>
         </ScrollView>
       </KeyboardAvoidingView>
     </ScreenContainer>
@@ -158,12 +204,12 @@ const styles = StyleSheet.create({
   },
   scrollContent: {
     flexGrow: 1,
-    justifyContent: 'center',
+    justifyContent: "center",
     paddingVertical: spacing.xxl,
     gap: spacing.xxl,
   },
   header: {
-    alignItems: 'center',
+    alignItems: "center",
     gap: spacing.sm,
   },
   title: {
@@ -173,15 +219,34 @@ const styles = StyleSheet.create({
   subtitle: {
     ...typography.body,
     color: colors.textSecondary,
-    textAlign: 'center',
+    textAlign: "center",
   },
   form: {
     gap: spacing.lg,
   },
+  poweredBy: {
+    alignItems: "center",
+    gap: spacing.xs,
+    marginTop: spacing.lg,
+  },
+  opfLogo: {
+    width: 64,
+    height: 64,
+  },
+  poweredByLabel: {
+    ...typography.caption,
+    color: colors.textSecondary,
+    marginTop: spacing.xs,
+  },
+  poweredByName: {
+    ...typography.bodyBold,
+    color: colors.text,
+    textAlign: "center",
+  },
   row: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
   },
   link: {
     ...typography.bodyBold,
