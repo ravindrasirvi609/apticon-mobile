@@ -10,8 +10,10 @@
     "ios": {
       "icon": "./assets/images/icon.png",
       "infoPlist": {
-        "NSCameraUsageDescription": "APTICON Staff needs camera access to scan attendee QR badges."
-      }
+        "NSCameraUsageDescription": "APTICON Staff needs camera access to scan attendee QR badges.",
+        "ITSAppUsesNonExemptEncryption": false
+      },
+      "bundleIdentifier": "com.apticon.apticonstaff"
     },
     "android": {
       "adaptiveIcon": {

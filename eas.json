@@ -20,6 +20,9 @@
     "production": {
       "autoIncrement": true,
       "credentialsSource": "local",
+      "ios": {
+        "credentialsSource": "remote"
+      },
       "android": {
         "buildType": "app-bundle"
       }
