@@ -6,6 +6,8 @@ import { colors } from '@/theme/tokens';
 
 export default function TabsLayout() {
   const status = useAuthStore((s) => s.status);
+  const user = useAuthStore((s) => s.user);
+  const isCheckinStaff = user?.role === 'checkin_staff';
 
   if (status === 'unauthenticated') {
     return <Redirect href="/(auth)/login" />;
@@ -30,6 +32,7 @@ export default function TabsLayout() {
         name="dashboard"
         options={{
           title: 'Dashboard',
+          href: isCheckinStaff ? null : undefined,
           tabBarIcon: ({ color, size }) => <Ionicons name="grid-outline" size={size} color={color} />,
         }}
       />
@@ -51,6 +54,7 @@ export default function TabsLayout() {
         name="reports"
         options={{
           title: 'Reports',
+          href: isCheckinStaff ? null : undefined,
           tabBarIcon: ({ color, size }) => <Ionicons name="bar-chart-outline" size={size} color={color} />,
         }}
       />
