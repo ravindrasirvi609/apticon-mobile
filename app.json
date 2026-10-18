@@ -9,6 +9,7 @@
     "userInterfaceStyle": "automatic",
     "ios": {
       "icon": "./assets/images/icon.png",
+      "buildNumber": "9",
       "infoPlist": {
         "NSCameraUsageDescription": "APTICON Staff needs camera access to scan attendee QR badges.",
         "ITSAppUsesNonExemptEncryption": false
