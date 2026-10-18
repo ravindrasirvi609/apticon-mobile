@@ -63,7 +63,6 @@ export default function DashboardScreen() {
           <View style={styles.grid}>
             <StatCard icon="people-outline" count={data?.totalRegistered ?? 0} label="Total Registered" />
             <StatCard icon="checkmark-circle-outline" count={data?.checkedIn ?? 0} label="Checked In" tint={colors.success} />
-            <StatCard icon="card-outline" count={data?.idCardIssued ?? 0} label="ID Cards" />
             <StatCard
               icon="cafe-outline"
               count={sumDays(data?.breakfast ?? {})}

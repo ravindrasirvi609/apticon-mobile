@@ -26,7 +26,7 @@ import { formatDateTime } from '@/utils/formatDate';
 import { STATUS_BADGE } from '@/utils/registrationStatus';
 import { capitalize } from '@/utils/text';
 
-const MEAL_DAYS = [1, 2, 3];
+const MEAL_DAYS = [1, 2];
 
 type PendingAction = {
   actionType: ActionType;
@@ -168,23 +168,6 @@ export default function AttendeeDetailScreen() {
         />
 
         <ActionCard
-          icon="card-outline"
-          title="Issue ID Card"
-          completedAt={status.idCard?.at}
-          completedBy={status.idCard?.by}
-          loading={recordAction.isPending && pendingAction?.actionType === 'id_card'}
-          disabled={!isApproved}
-          disabledReason={actionDisabledReason}
-          onPress={() =>
-            setPendingAction({
-              actionType: 'id_card',
-              title: 'Issue ID Card',
-              message: 'Confirm ID card issuance for this attendee?',
-            })
-          }
-        />
-
-        <ActionCard
           icon="bag-handle-outline"
           title="Kit"
           completedAt={kitIssuedAt}
@@ -242,23 +225,25 @@ export default function AttendeeDetailScreen() {
           }
         />
 
-        <ActionCard
-          icon="moon-outline"
-          title={`Dinner · Day ${mealDay}`}
-          completedAt={dinnerToday?.at}
-          completedBy={dinnerToday?.by}
-          loading={recordAction.isPending && pendingAction?.actionType === 'dinner'}
-          disabled={!isApproved}
-          disabledReason={actionDisabledReason}
-          onPress={() =>
-            setPendingAction({
-              actionType: 'dinner',
-              day: mealDay,
-              title: 'Dinner',
-              message: `Confirm dinner for Day ${mealDay}?`,
-            })
-          }
-        />
+        {mealDay !== 2 && (
+          <ActionCard
+            icon="moon-outline"
+            title={`Dinner · Day ${mealDay}`}
+            completedAt={dinnerToday?.at}
+            completedBy={dinnerToday?.by}
+            loading={recordAction.isPending && pendingAction?.actionType === 'dinner'}
+            disabled={!isApproved}
+            disabledReason={actionDisabledReason}
+            onPress={() =>
+              setPendingAction({
+                actionType: 'dinner',
+                day: mealDay,
+                title: 'Dinner',
+                message: `Confirm dinner for Day ${mealDay}?`,
+              })
+            }
+          />
+        )}
 
         <ActionCard
           icon="ribbon-outline"

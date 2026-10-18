@@ -18,7 +18,7 @@ import { colors, spacing, typography } from "@/theme/tokens";
 import { exportCsv } from "@/utils/csvExport";
 import { isToday } from "@/utils/formatDate";
 
-const MEAL_DAYS = [1, 2, 3];
+const MEAL_DAYS = [1, 2];
 
 const REPORT_DEFS: {
   type: ReportType;
@@ -32,7 +32,6 @@ const REPORT_DEFS: {
     icon: "checkmark-circle-outline",
     dayScoped: false,
   },
-  { type: "id-card", label: "ID Card", icon: "card-outline", dayScoped: false },
   {
     type: "breakfast",
     label: "Breakfast",
@@ -161,7 +160,7 @@ export default function ReportsScreen() {
 
             {selectedDef.dayScoped && (
               <View style={styles.dayChips}>
-                {MEAL_DAYS.map((d) => (
+                {(selectedDef.type === "dinner" ? [1] : MEAL_DAYS).map((d) => (
                   <FilterChip
                     key={d}
                     label={`Day ${d}`}
