@@ -3,7 +3,7 @@ import axios, { AxiosError, type AxiosRequestConfig, type AxiosResponse } from '
 import type { ApiEnvelope } from '@/api/types';
 import { useAuthStore } from '@/store/authStore';
 
-const baseURL = process.env.EXPO_PUBLIC_API_BASE_URL ?? 'https://apticon-2026.vercel.app/api/mobile';
+const baseURL = process.env.EXPO_PUBLIC_API_BASE_URL ?? 'https://apticon.in/api/mobile';
 
 export class ApiError extends Error {
   status: number;
